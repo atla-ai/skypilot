@@ -1,9 +1,12 @@
 """Constants used for Managed Jobs."""
 
-JOBS_CONTROLLER_TEMPLATE = 'jobs-controller.yaml.j2'
-JOBS_CONTROLLER_YAML_PREFIX = '~/.sky/jobs_controller'
+from sky.utils._atla_override import ATLA_OVERRIDE_PREFIX
 
-JOBS_TASK_YAML_PREFIX = '~/.sky/managed_jobs'
+
+JOBS_CONTROLLER_TEMPLATE = "jobs-controller.yaml.j2"
+JOBS_CONTROLLER_YAML_PREFIX = f"{ATLA_OVERRIDE_PREFIX}/jobs_controller"
+
+JOBS_TASK_YAML_PREFIX = f"{ATLA_OVERRIDE_PREFIX}/managed_jobs"
 
 # Resources as a dict for the jobs controller.
 # Use default CPU instance type for jobs controller with >= 24GB, i.e.
@@ -13,7 +16,7 @@ JOBS_TASK_YAML_PREFIX = '~/.sky/managed_jobs'
 # OOM (each vCPU can have 4 jobs controller processes as we set the CPU
 # requirement to 0.25, and 3 GB is barely enough for 4 job processes).
 # We use 50 GB disk size to reduce the cost.
-CONTROLLER_RESOURCES = {'cpus': '8+', 'memory': '3x', 'disk_size': 50}
+CONTROLLER_RESOURCES = {"cpus": "8+", "memory": "3x", "disk_size": 50}
 
 # Max length of the cluster name for GCP is 35, the user hash to be attached is
 # 4+1 chars, and we assume the maximum length of the job id is 4+1, so the max
